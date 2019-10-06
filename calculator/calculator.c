@@ -18,6 +18,7 @@ int main(){
     switch(type){
       case NUMBER:
         push(atof(s));
+        printf("~~%d~~", type);
         break;
       case '+':
         push(pop() + pop());
@@ -40,7 +41,7 @@ int main(){
         printf("\t%.8g\t", pop());
         break;
       default:
-        printf("\nError unknown command\n");
+        printf("\nError unknown command %s\n", s);
         break;
     }
   }
@@ -56,7 +57,7 @@ void push(double f){
   if(sp < MAXVAL)
     val[sp++] = f;
   else
-    printf("\nError: stack full, can't push\n");
+    printf("\nError: stack full, can't push %g\n", f);
 }
 
 double pop(void){
@@ -77,7 +78,8 @@ void ungetch(int);
 int getop(char s[]){
   int i, c;
   while(((c = getch()) == ' ' && (s[0] = c) == ' ') || c == '\t');
-  //s[1] = '\0';
+
+  s[1] = '\0';
   
   if(!isdigit(c) && c != '.')
     return c; 
